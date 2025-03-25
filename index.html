@@ -14,34 +14,52 @@
     <script defer src="./script.js"></script>
   </head>
   <body>
-    <main id="calculator">
-      <div id="calculator-body">
-        <div id="calculator-display">
-          <p id="display-text">00000000</p>
+    <div class="flex-wrapper">
+      <header class="header" id="main-header">Odin Calculator</header>
+      <main id="calculator-section">
+        <div id="calculator-body">
+          <div id="calculator-display">
+            <p class="text" id="display-text">00000000</p>
+          </div>
+          <div id="calculator-controls">
+            <button class="btn btn-clear" id="clear-btn">Clear</button>
+            <button class="btn btn-delete" id="delete-btn">Delete</button>
+          </div>
+          <div id="calculator-buttons">
+            <button class="btn btn-number" data-value="7">7</button>
+            <button class="btn btn-number" data-value="8">8</button>
+            <button class="btn btn-number" data-value="9">9</button>
+            <button class="btn btn-operator" data-value="/">÷</button>
+            <button class="btn btn-number" data-value="4">4</button>
+            <button class="btn btn-number" data-value="5">5</button>
+            <button class="btn btn-number" data-value="6">6</button>
+            <button class="btn btn-operator" data-value="*">×</button>
+            <button class="btn btn-number" data-value="1">1</button>
+            <button class="btn btn-number" data-value="2">2</button>
+            <button class="btn btn-number" data-value="3">3</button>
+            <button class="btn btn-operator" data-value="-">−</button>
+            <button class="btn btn-decimal" data-value=".">.</button>
+            <button class="btn btn-number" data-value="0">0</button>
+            <button class="btn btn-equal" id="equal-btn" data-value="=">
+              =
+            </button>
+            <button class="btn btn-operator" data-value="+">+</button>
+          </div>
         </div>
-        <div id="calculator-controls">
-          <button class="btn btn-clear" id="clear-btn">Clear</button>
-          <button class="btn btn-delete" id="delete-btn">Delete</button>
-        </div>
-        <div id="calculator-buttons">
-          <button class="btn btn-number" data-value="7">7</button>
-          <button class="btn btn-number" data-value="8">8</button>
-          <button class="btn btn-number" data-value="9">9</button>
-          <button class="btn btn-operator" data-value="/">÷</button>
-          <button class="btn btn-number" data-value="4">4</button>
-          <button class="btn btn-number" data-value="5">5</button>
-          <button class="btn btn-number" data-value="6">6</button>
-          <button class="btn btn-operator" data-value="*">×</button>
-          <button class="btn btn-number" data-value="1">1</button>
-          <button class="btn btn-number" data-value="2">2</button>
-          <button class="btn btn-number" data-value="3">3</button>
-          <button class="btn btn-operator" data-value="-">−</button>
-          <button class="btn btn-decimal" data-value=".">.</button>
-          <button class="btn btn-number" data-value="0">0</button>
-          <button class="btn btn-equal" id="equal-btn" data-value="=">=</button>
-          <button class="btn btn-operator" data-value="+">+</button>
-        </div>
-      </div>
-    </main>
+      </main>
+      <footer class="footer" id="main-footer">
+        <p class="text" id="copyright-text">
+          Copyright © The Odin Project 2025 — Created By
+          <a
+            class="link"
+            id="copyright-link"
+            href="http://github.com/mhmkhizar"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Muhammad Khizar</a
+          >
+        </p>
+      </footer>
+    </div>
   </body>
 </html>
