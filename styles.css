@@ -65,13 +65,13 @@ body {
   overflow-y: hidden;
 }
 
-#calculator-controls {
+#controls-buttons {
   display: flex;
   gap: 8px;
   margin-bottom: 8px;
 }
 
-#calculator-buttons {
+#operation-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
