@@ -1,32 +1,24 @@
 const calculatorButtons = document.querySelector("#calculator-buttons");
-const operationTextPara = document.querySelector("#operation-text");
-const resultTextPara = document.querySelector("#result-text");
+const mainDisplay = document.querySelector("#main-display");
+const referenceDisplay = document.querySelector("#reference-display");
 
 calculatorButtons.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("btn")) return;
+
   const button = e.target;
-
-  if (
-    button.id === "calculator-buttons" ||
-    button.id === "control-buttons" ||
-    button.id === "operation-buttons"
-  ) {
-    return;
-  }
-
   switch (button.id) {
     case "clear-btn":
-      resultTextPara.textContent = "0";
+      mainDisplay.textContent = "0";
       break;
+
     case "delete-btn":
-      if (resultTextPara.textContent.length > 1) {
-        resultTextPara.textContent = resultTextPara.textContent.slice(0, -1);
-      } else {
-        resultTextPara.textContent = "0";
-      }
+      mainDisplay.textContent =
+        mainDisplay.textContent.length > 1
+          ? mainDisplay.textContent.slice(0, -1)
+          : "0";
       break;
 
     case ".":
-      if (resultTextPara.textContent.includes(".")) return;
     case "0":
     case "1":
     case "2":
@@ -37,10 +29,11 @@ calculatorButtons.addEventListener("click", (e) => {
     case "7":
     case "8":
     case "9":
-      if (resultTextPara.textContent === "0") {
-        resultTextPara.textContent = button.id === "." ? "0" : "";
+      if (button.id === "." && mainDisplay.textContent.includes(".")) return;
+      if (mainDisplay.textContent === "0") {
+        mainDisplay.textContent = button.id === "." ? "0" : "";
       }
-      resultTextPara.textContent += button.id;
+      mainDisplay.textContent += button.id;
       break;
 
     case "+":
@@ -55,10 +48,10 @@ calculatorButtons.addEventListener("click", (e) => {
     case "/":
       console.log(button.id);
       break;
-
     case "=":
       console.log(button.id);
       break;
+
     default:
       console.log("Error");
       break;
