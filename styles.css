@@ -49,7 +49,7 @@ body {
   justify-content: space-between;
 }
 
-.display-text#operation {
+.display-text#operation-text {
   color: rgba(76, 175, 79, 0.5);
   font-size: 16px;
   overflow-x: auto;
@@ -57,7 +57,7 @@ body {
   white-space: nowrap;
 }
 
-.display-text#result {
+.display-text#result-text {
   color: #fff;
   font-size: 48px;
   text-align: right;
@@ -65,7 +65,7 @@ body {
   overflow-y: hidden;
 }
 
-#controls-buttons {
+#control-buttons {
   display: flex;
   gap: 8px;
   margin-bottom: 8px;
