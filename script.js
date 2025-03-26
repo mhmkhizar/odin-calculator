@@ -72,6 +72,6 @@ function operate(a, operator, b) {
     case "/":
       return a / b;
     default:
-      return "Invalid Operator";
+      return "Error";
   }
 }
