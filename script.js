@@ -33,6 +33,7 @@ function handleButtonClick(e) {
 }
 
 function calculateResult() {
+  if (currentValue === "" || previousValue === "") return;
   const result = operate(previousValue, currentOperator, currentValue);
   currentValue = result.toString();
   updateDisplay();
@@ -40,7 +41,7 @@ function calculateResult() {
 
 function handleOperator(operator) {
   currentOperator = operator;
-  previousValue = currentValue;
+  previousValue = currentValue === "" ? previousValue : currentValue;
   currentValue = "";
 }
 
