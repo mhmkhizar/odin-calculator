@@ -4,19 +4,17 @@ const referenceDisplay = document.querySelector("#reference-display");
 
 calculatorButtons.addEventListener("click", (e) => {
   if (!e.target.classList.contains("btn")) return;
-
   const button = e.target;
+
   switch (button.id) {
     case "clear-btn":
-      mainDisplay.textContent = "0";
-      break;
+      return (mainDisplay.textContent = "0");
 
     case "delete-btn":
-      mainDisplay.textContent =
+      return (mainDisplay.textContent =
         mainDisplay.textContent.length > 1
           ? mainDisplay.textContent.slice(0, -1)
-          : "0";
-      break;
+          : "0");
 
     case ".":
     case "0":
@@ -29,12 +27,11 @@ calculatorButtons.addEventListener("click", (e) => {
     case "7":
     case "8":
     case "9":
-      if (button.id === "." && mainDisplay.textContent.includes(".")) return;
+      if (mainDisplay.textContent.includes(".")) return;
       if (mainDisplay.textContent === "0") {
         mainDisplay.textContent = button.id === "." ? "0" : "";
       }
-      mainDisplay.textContent += button.id;
-      break;
+      return (mainDisplay.textContent += button.id);
 
     case "+":
       console.log(button.id);
