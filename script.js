@@ -1,4 +1,5 @@
 const mainDisplay = document.querySelector("#main-display");
+const referenceDisplay = document.querySelector("#reference-display");
 const calculatorButtons = document.querySelector("#calculator-buttons");
 
 let currentValue = "";
@@ -39,9 +40,12 @@ function calculateResult() {
   updateDisplay();
 }
 
+//CONTINUE
 function handleOperator(operator) {
   currentOperator = operator;
+
   previousValue = currentValue === "" ? previousValue : currentValue;
+  calculateResult();
   currentValue = "";
 }
 
@@ -49,13 +53,14 @@ function appendNumber(value) {
   if (currentValue.includes(".") && value === ".") return;
   if (currentValue === "" || currentValue === "0")
     currentValue = value === "." ? "0" : "";
-
   currentValue += value;
   updateDisplay();
 }
 
 function resetCalculator() {
   currentValue = "";
+  previousValue = "";
+  currentOperator = null;
   updateDisplay();
 }
 
