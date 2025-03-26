@@ -1,91 +1,40 @@
-const calculatorButtons = document.querySelector("#calculator-buttons");
 const mainDisplay = document.querySelector("#main-display");
-const referenceDisplay = document.querySelector("#reference-display");
+const calculatorButtons = document.querySelector("#calculator-buttons");
 
-calculatorButtons.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("btn")) return;
-  const button = e.target;
+calculatorButtons.addEventListener("click", handleButtonClick);
 
-  switch (button.id) {
-    case "clear-btn":
-      return (mainDisplay.textContent = "0");
+function handleButtonClick(e) {
+  if (!e.target.classList.contains("btn")) return console.log("hd");
 
-    case "delete-btn":
-      return (mainDisplay.textContent =
-        mainDisplay.textContent.length > 1
-          ? mainDisplay.textContent.slice(0, -1)
-          : "0");
-
-    case ".":
-    case "0":
-    case "1":
-    case "2":
-    case "3":
-    case "4":
-    case "5":
-    case "6":
-    case "7":
-    case "8":
-    case "9":
-      if (mainDisplay.textContent.includes(".")) return;
-      if (mainDisplay.textContent === "0") {
-        mainDisplay.textContent = button.id === "." ? "0" : "";
-      }
-      return (mainDisplay.textContent += button.id);
-
-    case "+":
-      console.log(button.id);
+  const buttonId = e.target.id;
+  switch (true) {
+    case buttonId === "clear-btn":
       break;
-    case "-":
-      console.log(button.id);
+    case buttonId === "delete-btn":
       break;
-    case "*":
-      console.log(button.id);
+    case isNumOrDecimal(buttonId):
       break;
-    case "/":
-      console.log(button.id);
+    case isOperator(buttonId):
       break;
-    case "=":
-      console.log(button.id);
-      break;
-
     default:
-      console.log("Error");
-      break;
+      return "Error";
   }
-});
-
-function add(a, b) {
-  return Number(a) + Number(b);
 }
 
-function subtract(a, b) {
-  return Number(a) - Number(b);
-}
+function operate(a, operator, b) {
+  a = Number(a);
+  b = Number(b);
 
-function multiply(a, b) {
-  return Number(a) * Number(b);
-}
-
-function divide(a, b) {
-  return Number(a) / Number(b);
-}
-
-function operate(operandA, operator, operandB) {
   switch (operator) {
     case "+":
-      return add(operandA, operandB);
+      return a + b;
     case "-":
-      return subtract(operandA, operandB);
+      return a - b;
     case "*":
-      return multiply(operandA, operandB);
+      return a * b;
     case "/":
-      return divide(operandA, operandB);
+      return a / b;
     default:
       return "Invalid Operator";
   }
 }
-
-const num1 = "4";
-const operation = "+";
-const num2 = "2";
