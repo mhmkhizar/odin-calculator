@@ -46,7 +46,7 @@ body {
   padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .display-text#main-display {
@@ -55,6 +55,14 @@ body {
   text-align: right;
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.display-text#reference-display {
+  color: rgba(76, 175, 79, 0.5);
+  font-size: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 #control-buttons {
