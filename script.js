@@ -2,6 +2,7 @@ const mainDisplay = document.querySelector("#main-display");
 const calculatorButtons = document.querySelector("#calculator-buttons");
 
 let currentValue = "";
+let previousValue = "";
 let currentOperator = null;
 
 calculatorButtons.addEventListener("click", handleButtonClick);
@@ -21,10 +22,26 @@ function handleButtonClick(e) {
       appendNumber(buttonValue);
       break;
     case isOperator(buttonValue):
+      handleOperator(buttonValue);
+      break;
+    case buttonValue === "=":
+      calculateResult();
       break;
     default:
       return "Error";
   }
+}
+
+function calculateResult() {
+  const result = operate(previousValue, currentOperator, currentValue);
+  currentValue = result.toString();
+  updateDisplay();
+}
+
+function handleOperator(operator) {
+  currentOperator = operator;
+  previousValue = currentValue;
+  currentValue = "";
 }
 
 function appendNumber(value) {
