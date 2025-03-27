@@ -5,6 +5,7 @@ const calculatorButtons = document.querySelector("#calculator-buttons");
 let currentValue = "";
 let previousValue = "";
 let currentOperator = null;
+let isResultCalculated = false;
 
 calculatorButtons.addEventListener("click", handleButtonClick);
 
@@ -36,17 +37,19 @@ function handleButtonClick(e) {
 function calculateResult() {
   if (currentValue === "" || previousValue === "") return;
   const result = operate(previousValue, currentOperator, currentValue);
+  isResultCalculated = true;
   currentValue = result.toString();
   updateDisplay();
 }
 
-//CONTINUE
 function handleOperator(operator) {
+  if (!isResultCalculated) {
+    calculateResult();
+    isResultCalculated = false;
+  }
   currentOperator = operator;
-
   previousValue = currentValue === "" ? previousValue : currentValue;
-  calculateResult();
-  currentValue = "";
+  currentValue = previousValue === "" ? currentValue : "";
 }
 
 function appendNumber(value) {
@@ -71,6 +74,10 @@ function deleteLastDigit() {
 
 function updateDisplay() {
   mainDisplay.textContent = currentValue || "0";
+  if (mainDisplay.textContent.length > 10)
+    mainDisplay.style.fontSize = `${
+      (278 / mainDisplay.textContent.length) * 1.73
+    }px`;
 }
 
 function isNumOrDecimal(value) {
