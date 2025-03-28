@@ -38,8 +38,9 @@ function calculateResult() {
   if (currentValue === "" || previousValue === "") return;
   const result = operate(previousValue, currentOperator, currentValue);
   isResultCalculated = true;
+  updateReferenceDisplay();
   currentValue = result.toString();
-  updateDisplay();
+  updateMainDisplay();
 }
 
 function handleOperator(operator) {
@@ -50,6 +51,7 @@ function handleOperator(operator) {
   currentOperator = operator;
   previousValue = currentValue === "" ? previousValue : currentValue;
   currentValue = previousValue === "" ? currentValue : "";
+  updateReferenceDisplay();
 }
 
 function appendNumber(value) {
@@ -57,27 +59,36 @@ function appendNumber(value) {
   if (currentValue === "" || currentValue === "0")
     currentValue = value === "." ? "0" : "";
   currentValue += value;
-  updateDisplay();
+  updateMainDisplay();
+  updateReferenceDisplay();
 }
 
 function resetCalculator() {
   currentValue = "";
   previousValue = "";
   currentOperator = null;
-  updateDisplay();
+  updateMainDisplay();
 }
 
 function deleteLastDigit() {
   currentValue = currentValue.slice(0, -1);
-  updateDisplay();
+  updateMainDisplay();
 }
 
-function updateDisplay() {
+function updateMainDisplay() {
   mainDisplay.textContent = currentValue || "0";
   if (mainDisplay.textContent.length > 10)
     mainDisplay.style.fontSize = `${
       (278 / mainDisplay.textContent.length) * 1.73
     }px`;
+}
+
+function updateReferenceDisplay() {
+  if (currentValue === "" || currentOperator === null || previousValue === "")
+    return;
+  referenceDisplay.textContent = isResultCalculated
+    ? `${previousValue} ${currentOperator} ${currentValue} =`
+    : `${previousValue} ${currentOperator}`;
 }
 
 function isNumOrDecimal(value) {
