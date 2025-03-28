@@ -77,18 +77,21 @@ function deleteLastDigit() {
 
 function updateMainDisplay() {
   mainDisplay.textContent = currentValue || "0";
+
   if (mainDisplay.textContent.length > 10)
-    mainDisplay.style.fontSize = `${
-      (278 / mainDisplay.textContent.length) * 1.73
-    }px`;
+    mainDisplay.style.marginBottom = "-5px";
 }
 
 function updateReferenceDisplay() {
   if (currentValue === "" || currentOperator === null || previousValue === "")
     return;
+
   referenceDisplay.textContent = isResultCalculated
     ? `${previousValue} ${currentOperator} ${currentValue} =`
     : `${previousValue} ${currentOperator}`;
+
+  if (referenceDisplay.textContent.length > 30)
+    referenceDisplay.style.marginBottom = "-5px";
 }
 
 function isNumOrDecimal(value) {
