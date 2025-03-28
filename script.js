@@ -35,7 +35,11 @@ function handleButtonClick(e) {
 }
 
 function calculateResult() {
-  if (currentValue === "" || previousValue === "") return;
+  if (previousValue === "" || currentOperator === null || currentValue === "") {
+    currentOperator = null;
+    return;
+  }
+
   const result = operate(previousValue, currentOperator, currentValue);
   isResultCalculated = true;
   updateReferenceDisplay();
@@ -68,6 +72,7 @@ function resetCalculator() {
   previousValue = "";
   currentOperator = null;
   updateMainDisplay();
+  updateReferenceDisplay();
 }
 
 function deleteLastDigit() {
@@ -83,12 +88,13 @@ function updateMainDisplay() {
 }
 
 function updateReferenceDisplay() {
-  if (currentValue === "" || currentOperator === null || previousValue === "")
-    return;
-
-  referenceDisplay.textContent = isResultCalculated
-    ? `${previousValue} ${currentOperator} ${currentValue} =`
-    : `${previousValue} ${currentOperator}`;
+  if (previousValue === "" || currentOperator === null || currentValue === "") {
+    referenceDisplay.textContent = "";
+  } else {
+    referenceDisplay.textContent = isResultCalculated
+      ? `${previousValue} ${currentOperator} ${currentValue} =`
+      : `${previousValue} ${currentOperator}`;
+  }
 
   if (referenceDisplay.textContent.length > 30)
     referenceDisplay.style.marginBottom = "-5px";
