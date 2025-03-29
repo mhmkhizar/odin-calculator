@@ -40,7 +40,7 @@ function calculateResult() {
   }
 
   const result = operate(previousValue, currentOperator, currentValue);
-  currentValue = roundNumber(result);
+  currentValue = roundResult(result);
   previousValue = "";
   currentOperator = null;
   isResultCalculated = true;
@@ -107,7 +107,7 @@ function isOperator(value) {
   return ["+", "-", "*", "/"].includes(value);
 }
 
-function roundNumber(number) {
+function roundResult(number) {
   if (Math.abs(number) > 1e20 || Math.abs(number) < 1e-6) {
     return Number(number.toPrecision(10)).toString();
   } else {
