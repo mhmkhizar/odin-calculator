@@ -50,7 +50,7 @@ function calculateResult() {
 function handleOperator(operator) {
   if (!isResultCalculated) {
     calculateResult();
-    isResultCalculated;
+    isResultCalculated = false;
   }
   currentOperator = operator;
   previousValue = currentValue === "" ? previousValue : currentValue;
@@ -73,6 +73,7 @@ function resetCalculator() {
   currentValue = "";
   previousValue = "";
   currentOperator = null;
+  isResultCalculated = false;
   updateDisplay();
 }
 
@@ -89,6 +90,8 @@ function updateDisplay() {
   if (isResultCalculated) {
     display.style.fontSize =
       length > 10 && length <= 20 ? `${480 / length}px` : "48px";
+  } else {
+    display.style.fontSize = "48px";
   }
 
   if (length > 20) {
