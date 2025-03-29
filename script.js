@@ -1,5 +1,4 @@
-const mainDisplay = document.querySelector("#main-display");
-const referenceDisplay = document.querySelector("#reference-display");
+const display = document.querySelector("#display-text");
 const calculatorButtons = document.querySelector("#calculator-buttons");
 
 let currentValue = "";
@@ -41,63 +40,60 @@ function calculateResult() {
   }
 
   const result = operate(previousValue, currentOperator, currentValue);
+  currentValue = roundNumber(result);
+  previousValue = "";
+  currentOperator = null;
   isResultCalculated = true;
-  updateReferenceDisplay();
-  currentValue = result.toString();
-  updateMainDisplay();
+  updateDisplay();
 }
 
 function handleOperator(operator) {
   if (!isResultCalculated) {
     calculateResult();
-    isResultCalculated = false;
+    isResultCalculated;
   }
   currentOperator = operator;
   previousValue = currentValue === "" ? previousValue : currentValue;
-  currentValue = previousValue === "" ? currentValue : "";
-  updateReferenceDisplay();
+  currentValue = isResultCalculated ? currentValue : "";
 }
 
 function appendNumber(value) {
+  if (isResultCalculated) {
+    currentValue = "";
+    isResultCalculated = false;
+  }
   if (currentValue.includes(".") && value === ".") return;
   if (currentValue === "" || currentValue === "0")
     currentValue = value === "." ? "0" : "";
   currentValue += value;
-  updateMainDisplay();
-  updateReferenceDisplay();
+  updateDisplay();
 }
 
 function resetCalculator() {
   currentValue = "";
   previousValue = "";
   currentOperator = null;
-  updateMainDisplay();
-  updateReferenceDisplay();
+  updateDisplay();
 }
 
 function deleteLastDigit() {
   currentValue = currentValue.slice(0, -1);
-  updateMainDisplay();
+  updateDisplay();
 }
 
-function updateMainDisplay() {
-  mainDisplay.textContent = currentValue || "0";
+function updateDisplay() {
+  display.textContent = currentValue || "0";
+  const length = display.textContent.length;
+  display.scrollLeft = display.scrollWidth;
 
-  if (mainDisplay.textContent.length > 10)
-    mainDisplay.style.marginBottom = "-5px";
-}
-
-function updateReferenceDisplay() {
-  if (previousValue === "" || currentOperator === null || currentValue === "") {
-    referenceDisplay.textContent = "";
-  } else {
-    referenceDisplay.textContent = isResultCalculated
-      ? `${previousValue} ${currentOperator} ${currentValue} =`
-      : `${previousValue} ${currentOperator}`;
+  if (isResultCalculated) {
+    display.style.fontSize =
+      length > 10 && length <= 20 ? `${480 / length}px` : "48px";
   }
 
-  if (referenceDisplay.textContent.length > 30)
-    referenceDisplay.style.marginBottom = "-5px";
+  if (length > 20) {
+    display.style.marginBottom = "-5px";
+  }
 }
 
 function isNumOrDecimal(value) {
@@ -106,6 +102,14 @@ function isNumOrDecimal(value) {
 
 function isOperator(value) {
   return ["+", "-", "*", "/"].includes(value);
+}
+
+function roundNumber(number) {
+  if (Math.abs(number) > 1e20 || Math.abs(number) < 1e-6) {
+    return Number(number.toPrecision(10)).toString();
+  } else {
+    return Number(number.toFixed(8)).toString();
+  }
 }
 
 function operate(a, operator, b) {
