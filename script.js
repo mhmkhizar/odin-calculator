@@ -94,7 +94,7 @@ function updateDisplay() {
     display.style.fontSize = "48px";
   }
 
-  if (length > 20) {
+  if (length > 10) {
     display.style.marginBottom = "-5px";
   }
 }
