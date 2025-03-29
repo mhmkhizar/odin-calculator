@@ -32,10 +32,6 @@ You can view a live demo of the calculator [here](https://mhmkhizar.github.io/od
 2. Open `index.html` in your browser.
 3. Use the calculator buttons to perform arithmetic operations.
 
-## Screenshots
-
-![Calculator Screenshot](#)
-
 ## Author
 
 Created by [Muhammad Khizar](https://github.com/mhmkhizar).
